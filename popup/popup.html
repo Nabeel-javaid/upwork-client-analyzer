@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upwork Client Analyzer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+    }
+    
+    .container {
+      width: 300px;
+      padding: 10px;
+    }
+    
+    h1 {
+      font-size: 18px;
+      margin-top: 0;
+      color: #14a800;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+    }
+    
+    h2 {
+      font-size: 16px;
+      margin: 10px 0 8px 0;
+    }
+    
+    .toggle-container {
+      margin: 10px 0;
+    }
+    
+    .settings-section {
+      background-color: #f9f9f9;
+      padding: 12px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+    }
+    
+    .setting-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .setting-item label {
+      width: 130px;
+    }
+    
+    .setting-item input[type="range"] {
+      width: 100px;
+      margin: 0 8px;
+    }
+    
+    .setting-item span {
+      min-width: 30px;
+      text-align: right;
+    }
+    
+    .score-legend {
+      margin-top: 15px;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    
+    .color-box {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin-right: 10px;
+    }
+    
+    .color-box.good {
+      background-color: #14a800;
+    }
+    
+    .color-box.average {
+      background-color: #f39c12;
+    }
+    
+    .color-box.poor {
+      background-color: #e74c3c;
+    }
+    
+    .footer {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      padding-top: 10px;
+      border-top: 1px solid #eee;
+    }
+    
+    #resetButton {
+      background-color: #14a800;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    #resetButton:hover {
+      background-color: #108600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Upwork Client Analyzer</h1>
+    
+    <div class="toggle-container">
+      <label>
+        <input type="checkbox" id="enableExtension" checked>
+        Enable Extension
+      </label>
+    </div>
+    
+    <div class="settings-section">
+      <h2>Scoring Weights</h2>
+      <div class="setting-item">
+        <label for="hiringRateWeight">Hiring Rate:</label>
+        <input type="range" id="hiringRateWeight" min="0" max="50" value="40">
+        <span id="hiringRateValue">40</span>
+      </div>
+      
+      <div class="setting-item">
+        <label for="paymentVerifiedWeight">Payment Verified:</label>
+        <input type="range" id="paymentVerifiedWeight" min="0" max="25" value="15">
+        <span id="paymentVerifiedValue">15</span>
+      </div>
+      
+      <div class="setting-item">
+        <label for="lastSeenWeight">Recent Activity:</label>
+        <input type="range" id="lastSeenWeight" min="0" max="30" value="20">
+        <span id="lastSeenValue">20</span>
+      </div>
+      
+      <div class="setting-item">
+        <label for="totalJobsWeight">Job History:</label>
+        <input type="range" id="totalJobsWeight" min="0" max="20" value="10">
+        <span id="totalJobsValue">10</span>
+      </div>
+      
+      <div class="setting-item">
+        <label for="totalSpendingWeight">Total Spending:</label>
+        <input type="range" id="totalSpendingWeight" min="0" max="25" value="15">
+        <span id="totalSpendingValue">15</span>
+      </div>
+    </div>
+    
+    <div class="settings-section">
+      <h2>Score Thresholds</h2>
+      <div class="setting-item">
+        <label for="goodThreshold">Good Score:</label>
+        <input type="range" id="goodThreshold" min="50" max="90" value="70">
+        <span id="goodThresholdValue">70</span>
+      </div>
+      
+      <div class="setting-item">
+        <label for="averageThreshold">Average Score:</label>
+        <input type="range" id="averageThreshold" min="20" max="60" value="40">
+        <span id="averageThresholdValue">40</span>
+      </div>
+    </div>
+    
+    <div class="score-legend">
+      <h2>Score Legend</h2>
+      <div class="legend-item">
+        <div class="color-box good"></div>
+        <span>Good (70+): Worth applying</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box average"></div>
+        <span>Average (40-69): Consider carefully</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box poor"></div>
+        <span>Poor (0-39): Probably not worth it</span>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <button id="resetButton">Reset to Defaults</button>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

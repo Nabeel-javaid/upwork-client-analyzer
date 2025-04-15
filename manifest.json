@@ -1,29 +1,37 @@
 {
-    "manifest_version": 3,
-    "name": "Upwork Client Analyzer",
-    "version": "0.1.0",
-    "description": "Analyze Upwork clients to determine if it's worth applying to their jobs",
-    "permissions": [
-      "storage",
-      "scripting"
-    ],
-    "host_permissions": [
-      "https://*.upwork.com/*"
-    ],
-    "background": {
-      "service_worker": "background.js"
+  "manifest_version": 3,
+  "name": "Upwork Client Analyzer",
+  "version": "0.1.0",
+  "description": "Analyze Upwork clients to determine if it's worth applying to their jobs",
+  "permissions": [
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://*.upwork.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {},
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.upwork.com/jobs/*"
+      ],
+      "js": [
+        "content-scripts/job-page.js",
+        "content-scripts/utils.js"
+      ]
     },
-    "action": {
-      "default_popup": "popup/popup.html"
-    },
-    "content_scripts": [
-      {
-        "matches": ["https://*.upwork.com/jobs/*"],
-        "js": ["content-scripts/job-page.js", "content-scripts/utils.js"]
-      },
-      {
-        "matches": ["https://*.upwork.com/search/*"],
-        "js": ["content-scripts/search-page.js", "content-scripts/utils.js"]
-      }
-    ]
-  }
+    {
+      "matches": [
+        "https://*.upwork.com/search/*"
+      ],
+      "js": [
+        "content-scripts/search-page.js",
+        "content-scripts/utils.js"
+      ]
+    }
+  ]
+}
